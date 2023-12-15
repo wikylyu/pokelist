@@ -1,0 +1,32 @@
+<div class="card mat-elevation-z2" matRipple>
+  <div class="loader" *ngIf="loading; else detail">
+    <mat-spinner [diameter]="40"></mat-spinner>
+  </div>
+  <ng-template #detail>
+    <div class="title">
+      <span class="no">#{{ pokemon?.id }}</span> {{ pokemon?.name | titlecase }}
+    </div>
+
+    <div class="content">
+      <div class="sprites">
+        <img
+          [src]="pokemon?.sprites?.front_default"
+          alt="pokemon sprite"
+          width="64px"
+          height="64px"
+        />
+        <img
+          [src]="pokemon?.sprites?.back_default"
+          alt="pokemon sprite"
+          width="64px"
+          height="64px"
+        />
+      </div>
+      <div class="stats">
+        <div *ngFor="let stat of pokemon?.stats">
+          {{ stat.stat.name | uppercase }}: {{ stat.base_stat | number }}
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

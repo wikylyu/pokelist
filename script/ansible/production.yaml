@@ -1,0 +1,16 @@
+- hosts: localhost
+  tasks:
+    - name: build pokelist.wikylyu.xyz
+      command: "{{item}}"
+      with_items:
+        - git checkout master
+        - ng build --configuration production
+      args:
+        chdir: "{{playbook_dir}}/../.."
+- hosts: wikylyu.xyz
+  user: wiky
+  tasks:
+    - name: deploy pokelist.wikylyu.xyz
+      synchronize:
+        src: "{{playbook_dir}}/../../dist/pokelist/browser/"
+        dest: /home/wiky/run/pokelist.wikylyu.xyz/
