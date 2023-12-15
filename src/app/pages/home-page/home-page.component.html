@@ -1,11 +1,10 @@
 <app-home-toolbar></app-home-toolbar>
 <div class="pokemon-list" (scroll)="onScroll($event)">
-  <app-pokemon-card
-    *ngFor="let item of pokemons"
-    [item]="item"
-  ></app-pokemon-card>
-
-  <div class="loader" *ngIf="loading">
+  @for (item of pokemons; track $index) {
+  <app-pokemon-card [item]="item"></app-pokemon-card>
+  } @if (loading) {
+  <div class="loader">
     <mat-spinner [diameter]="60"></mat-spinner>
   </div>
+  }
 </div>
